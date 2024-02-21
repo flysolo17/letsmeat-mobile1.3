@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="10dp">
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkOut"/>
+    <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearance="@style/rounded"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/product"
+        android:scaleType="fitXY"
+        android:id="@+id/imageProduct"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="5dp">
+        <TextView
+            android:id="@+id/textProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/product_name" />
+
+        <TextView
+            android:id="@+id/textProductOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="variation"
+            android:textSize="12sp"
+            android:textColor="#F44336" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:cardCornerRadius="5dp"
+                android:layout_margin="5dp"
+                app:strokeWidth="1dp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="15dp"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:id="@+id/buttonMinus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/minus"/>
+                    <TextView
+                        android:id="@+id/textQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:paddingHorizontal="10dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/_0"/>
+                    <ImageButton
+                        android:id="@+id/buttonAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/add"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/_0"/>
+    </LinearLayout>
+
+
+</LinearLayout>

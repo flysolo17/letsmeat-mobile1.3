@@ -1,0 +1,164 @@
+<resources>
+    <string name="app_name">letsmeat</string>
+    <string name="messages">Messages</string>
+    <string name="shop">Shop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_product_here">Search Product Here</string>
+
+
+    <!--
+    From old project
+    -->
+
+
+    <string name="sample">Sample</string>
+    <string name="placeholder"> dfvsdfvsgsfgsdfgfsdgdfgdfgdfgdfgfdgdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdf</string>
+    <string name="product_name">Product Name</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="emails">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="new_to_let_s_meat">New to Let\'s Meat?</string>
+    <string name="phone">Phone</string>
+    <string name="sign_in">Sign in</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="juan_dela_cruz">Juan Dela Cruz</string>
+    <string name="edit">Edit</string>
+    <string name="your_cart_is_empty">YOUR CART IS EMPTY!</string>
+    <string name="no_user_found">No user found!</string>
+    <string name="login">Login</string>
+    <string name="checkout">Checkout</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="region_province_city_barangay">Region, Province, City, Barangay</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="address">Address</string>
+    <string name="contact">Contact #</string>
+    <string name="street_name_building_house_no">Street Name, Building, House No.</string>
+    <string name="submit">SUBMIT</string>
+    <string name="_0943433232">0943433232</string>
+    <string name="person_name">Person name</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="_0">0</string>
+    <string name="order_total">Order Total</string>
+    <string name="p_12_000">P 12,000</string>
+    <string name="message">Message:</string>
+    <string name="please_leave_a_message">Please Leave a message</string>
+    <string name="_0_items">(0 items):</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="weight">Weight</string>
+    <string name="shipping_fee">Shipping Fee</string>
+    <string name="place_order">Place Order</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="add">Add</string>
+    <string name="total_weight">Total Weight</string>
+    <string name="as">₱</string>
+    <string name="total">Total</string>
+    <string name="sold">Sold</string>
+    <string name="_0kg">0kg</string>
+    <string name="login_with_mobile">Login with mobile</string>
+    <string name="we_ll_check_if_you_already_hava_an_account">By tapping next, we will collect your mobile phone number to be able to send you a one time password (OTP). We\'ll check if you already have an account.</string>
+    <string name="todo">TODO</string>
+    <string name="resend">Resend</string>
+    <string name="didn_t_recieve_the_otp">Didn\'t recieve the OTP?</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="we_ve_sent_a_verification_code_to">We\'ve sent a verification code to</string>
+    <string name="confirm">Confirm</string>
+    <string name="full_name">Full name</string>
+    <string name="add_image">Add image</string>
+    <string name="view_purchase_history">View Purchase History</string>
+    <string name="my_purchases">My Purchases</string>
+    <string name="pending">Pending</string>
+    <string name="order_totals">Order Total:</string>
+    <string name="_1_item">1 item</string>
+    <string name="cancel">Cancel</string>
+    <string name="order_accepted">ORDER ACCEPTED</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="order">Order #:</string>
+    <string name="nancayasan_urdaneta_pangasinan">Nancayasan, Urdaneta Pangasinan</string>
+    <string name="_12_apr">12 apr</string>
+    <string name="_08_17">08:17</string>
+    <string name="details">details</string>
+    <string name="status">STATUS</string>
+    <string name="reciever">Reciever:</string>
+    <string name="rate">Rate</string>
+    <string name="description">Description</string>
+    <string name="to_rate">To Rate</string>
+    <string name="logout">Logout</string>
+    <string name="subtotal_without_tax">Subtotal without tax</string>
+    <string name="vat">VAT</string>
+    <string name="comment">Comment</string>
+    <string name="rate_your_order">Rate your order!</string>
+    <string name="messagessss">A paragraph (from Ancient Greek παράγραφος (parágraphos) \'to write beside\') is a self-contained unit of discourse in writing dealing with a particular point or idea. Though not required by the orthographic conventions of any language with a writing system, paragraphs are a conventional means of organizing extended segments of prose.</string>
+    <string name="_1_54_am">1:54 AM</string>
+    <string name="add_address">Add Address</string>
+    <string name="seach_product_here">Seach Product Here...</string>
+
+    <string name="hyperlink"><a href="http://localhost:4200/eula">Click here</a></string>
+    <string name="jff_frozen_meat">JFF Frozen Meat</string>
+    <string name="deliver">DELIVER</string>
+
+
+    <string name="terms_and_conditions">
+        TERMS &amp; CONDITIONS\n\n
+
+        Last Updated: [12/21/2023]\n\n
+
+        1.) User Account Responsibilities:\n
+        Users are responsible for maintaining the confidentiality of their account information, including login credentials. Any activity that occurs under the user\'s account is their responsibility.\n\n
+        2.) Prohibited Activities:\n
+        Clearly outline activities that are strictly prohibited on the platform, such as fraudulent transactions, hacking, or any other illegal activities. Specify the consequences for engaging in such activities, including account suspension or legal action.\n\n
+        3.) Payment Terms:\n
+        The application only accepts COH, COD, and Gcash payments throughout the whole process. Any other transaction that is not mentioned above is strictly prohibited by the company. Any result of unusual payments is not covered by the company.\n\n
+        4.) Shipping and Delivery:\n
+        JJF FROZEN FOODS company offers a COD mode of transaction. An additional Fee will be charged to the customer once they ordered a product through COD method. Any damaged, loss, or wrong package delivery is covered by the company as long as it is proven that it is the company\'s negligence.\n\n
+        5.) Intellectual Property Rights:\n
+        All of the trademarks, photos, and descriptions of the products are authorized by the companies. Users should not reproduce, distribute, or modify any content without explicit permission.
+    </string>
+
+
+    <string name="privacy">
+
+        Privacy Policy \n\n
+
+        Last Updated: [12/21/2023]\n\n
+
+        1. Information We Collect:\n
+        We collect basic user information for account creation and app functionality.
+        No sensitive personal data is gathered without your explicit consent. \n\n
+
+        2. How We Use Your Data:\n
+        Your information is used to personalize your experience and improve our app.
+        We do not sell or share your data with third parties for marketing purposes. \n\n
+
+        3. Security Measures:\n
+        We employ industry-standard measures to safeguard your data.
+        Your account is protected by secure login methods. \n\n
+
+        4. Third-Party Services:\n
+        We may use third-party services for analytics, but your data remains anonymous.\n
+        Review their privacy policies for further details.
+
+        5. User Controls:\n
+        You can review, update, or delete your data within the app settings.\n
+        Opt-out of non-essential data collection at any time. \n\n
+
+        6. Children\'s Privacy:\n
+        Our app is not intended for users under 13.\n
+        We do not knowingly collect information from children. \n\n
+
+        7. Changes to Privacy Policy:\n
+        Any updates will be posted here. Check regularly for changes.\n
+        Your continued use implies acceptance of the updated policy. \n\n
+
+        8. Contact Us:\n
+        For questions or concerns, contact us at [JJF.ADM1@gmail.com].\n
+        Subject: LET\'S MEAT Privacy Concerns. \n\n
+    </string>
+    <string name="save_address">Save Address</string>
+    <string name="gcash_desciption">Thank you for choosing GCash as your payment method! Please complete your transaction by sending the total amount due to our GCash account with the following details:</string>
+    <string name="attach">After Sending the exact amount screenshot or save your receipt and attach your receipt below.</string>
+    <string name="attach_receipt">Attach Receipt</string>
+
+</resources>

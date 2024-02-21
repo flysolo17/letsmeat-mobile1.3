@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/menu_shop">
+
+    <fragment
+        android:id="@+id/menu_shop"
+        android:name="com.cjay.letsmeat.views.nav.shop.ShopFragment"
+        android:label="Shop"
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_menu_shop_to_viewProductFragment"
+            app:destination="@id/viewProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_profile"
+        android:name="com.cjay.letsmeat.views.nav.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_menu_profile_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_menu_profile_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_menu_profile_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_menu_profile_to_addressesFragment"
+            app:destination="@id/addressesFragment" />
+        <action
+            android:id="@+id/action_menu_profile_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_menu_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewProductFragment"
+        android:name="com.cjay.letsmeat.views.nav.shop.ViewProductFragment"
+        android:label=""
+        tools:layout="@layout/fragment_view_product" >
+        <argument
+            android:name="products"
+            app:argType="com.cjay.letsmeat.models.product.Products" />
+        <action
+            android:id="@+id/action_viewProductFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_viewProductFragment_to_selectedProductFragment"
+            app:destination="@id/selectedProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cjay.letsmeat.views.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_otpViewFragment"
+            app:destination="@id/otpViewFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/otpViewFragment"
+        android:name="com.cjay.letsmeat.views.auth.OtpViewFragment"
+        android:label=""
+        tools:layout="@layout/fragment_otp_view" >
+        <argument
+            android:name="phone"
+            app:argType="com.cjay.letsmeat.models.customers.PhoneAuth" />
+    </dialog>
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.cjay.letsmeat.views.policy.TermsFragment"
+        android:label="Terms And Conditions"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.cjay.letsmeat.views.policy.PrivacyFragment"
+        android:label="Privacy Policy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/addressesFragment"
+        android:name="com.cjay.letsmeat.views.nav.profile.AddressesFragment"
+        android:label="Addresses"
+        tools:layout="@layout/fragment_addresses" >
+        <action
+            android:id="@+id/action_addressesFragment_to_createAddressFragmemt"
+            app:destination="@id/createAddressFragmemt" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.cjay.letsmeat.views.auth.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password" >
+        <argument
+            android:name="customer"
+            app:argType="com.cjay.letsmeat.models.customers.Customers" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.cjay.letsmeat.views.auth.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="customer"
+            app:argType="com.cjay.letsmeat.models.customers.Customers" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAddressFragmemt"
+        android:name="com.cjay.letsmeat.views.nav.profile.CreateAddressFragmemt"
+        android:label="Create Address"
+        tools:layout="@layout/fragment_create_address_fragmemt" >
+        <argument
+            android:name="customer"
+            app:argType="com.cjay.letsmeat.models.customers.Customers" />
+    </fragment>
+    <dialog
+        android:id="@+id/selectedProductFragment"
+        android:name="com.cjay.letsmeat.views.nav.shop.SelectedProductFragment"
+        android:label="fragment_selected_product"
+        tools:layout="@layout/fragment_selected_product" >
+        <argument
+            android:name="product"
+            app:argType="com.cjay.letsmeat.models.product.Products" />
+        <argument
+            android:name="option"
+            app:argType="com.cjay.letsmeat.models.product.ProductOptions"
+            app:nullable="true" />
+        <argument
+            android:name="isCheckout"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_selectedProductFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/menu_cart"
+        android:name="com.cjay.letsmeat.views.cart.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_menu_cart_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.cjay.letsmeat.views.checkout.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="items"
+            app:argType="com.cjay.letsmeat.models.transactions.OrderItems[]" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressesFragment"
+            app:destination="@id/addressesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.cjay.letsmeat.views.checkout.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <argument
+            android:name="transaction"
+            app:argType="com.cjay.letsmeat.models.transactions.Transactions" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewTransaction"
+        android:name="com.cjay.letsmeat.views.transactions.ViewTransaction"
+        android:label="Review Transaction"
+        tools:layout="@layout/fragment_view_transaction" >
+        <argument
+            android:name="transaction"
+            app:argType="com.cjay.letsmeat.models.transactions.Transactions" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_transactions"
+        android:name="com.cjay.letsmeat.views.transactions.TransactionsFragment"
+        android:label="Transactions"
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/action_menu_transactions_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_menu_transactions_to_viewTransaction"
+            app:destination="@id/viewTransaction" />
+        <action
+            android:id="@+id/action_menu_transactions_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_messages"
+        android:name="com.cjay.letsmeat.views.nav.messages.MessagesFragment"
+        android:label="messages"
+        tools:layout="@layout/fragment_messages" />
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+
+    </style>
+
+    <style name="rounded" parent="">
+        <item name="cornerSize">15dp</item>
+    </style>
+
+    <style name="TextTitle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="TextPrice" parent="">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ProductCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="CornerCut" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780547246274",
+    "project_id": "let-s-meat-67f65",
+    "storage_bucket": "let-s-meat-67f65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780547246274:android:05cc0eba9acf9b28d6135b",
+        "android_client_info": {
+          "package_name": "com.cjay.letsmeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780547246274-ke0952o6u048um75qqleobs2k4o0pb94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAP2AH6uUU_-9ux_BE950z0CZPGd5mJhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780547246274-ke0952o6u048um75qqleobs2k4o0pb94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

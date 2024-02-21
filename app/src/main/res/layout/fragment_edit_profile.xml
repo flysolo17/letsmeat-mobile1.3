@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center_horizontal"
+    tools:context=".views.auth.EditProfileFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearance="@style/CornerCut"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageProfile"
+            android:src="@drawable/profile"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/baseline_add_a_photo_24"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:id="@+id/buttonAddProfile"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_image"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:focusable="true" />
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputFullnameLayout"
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputFullName"
+            android:hint="@string/full_name"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:id="@+id/buttonSave"
+        android:text="Save"
+        app:cornerRadius="10dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:padding="16dp"
+        android:fontFamily="@font/poppins_medium"
+        />
+</LinearLayout>

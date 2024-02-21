@@ -1,0 +1,53 @@
+package com.cjay.letsmeat.models.transactions
+
+import android.os.Parcelable
+import com.cjay.letsmeat.models.product.ProductOptions
+import com.cjay.letsmeat.utils.computeItemSubtotal
+import com.cjay.letsmeat.utils.computeItemTotalCost
+import com.cjay.letsmeat.utils.generateRandomNumbers
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class OrderItems(
+    val id: String = generateRandomNumbers(),
+    val productID : String = " ",
+    val name: String = "",
+    val image: String  = "",
+    val quantity: Int = 1,
+    val price : Double  = 0.00,
+    val options : ProductOptions? = null,
+    val weight : Double = 0.00,
+    val cost : Double = 0.00,
+    val subtotal : Double= 0.00
+) : Parcelable
+
+fun OrderItems.getTotal() : Double {
+    return computeItemSubtotal(this.price,this.quantity,this.options)
+}
+
+fun OrderItems.getCost() : Double {
+    return  computeItemTotalCost(this.cost,this.quantity,this.options)
+}
+
+fun List<OrderItems>.getTotalWithoutTax(total : Double) : Double {
+    return (100-12) * total / 100;
+}
+fun List<OrderItems>.getTotalWithTax() : Double {
+   return this.sumOf { it.getTotal() }
+}
+fun List<OrderItems>.computeTotalTax() : Double {
+    return 12 * this.getTotalWithTax() / 100
+}
+
+fun List<OrderItems>.getTotalWeight() : Double{
+    var total = 0.00
+    this.map {
+        total += it.weight
+    }
+    return total
+}
+
+fun OrderItems.getQuantity() : Int {
+    val optionQ = this.options?.quantity ?: 1
+    return  this.quantity * optionQ
+}

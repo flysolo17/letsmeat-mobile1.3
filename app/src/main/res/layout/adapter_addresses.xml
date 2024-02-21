@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Widget.Material3.CardView.Filled"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/juan_dela_cruz"
+                android:textSize="18sp"
+                android:id="@+id/textFullname"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_0943433232"
+                android:id="@+id/textPhoneNumber"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/street_name_building_house_no"
+            android:textSize="14sp"
+            android:id="@+id/textStreet"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/textAddressLine"
+                android:layout_height="wrap_content"
+                android:text="@string/street_name_building_house_no"
+                android:textSize="14sp"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2421"
+                android:textSize="14sp"
+                android:id="@+id/textPostalCode"
+
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Default"
+            android:id="@+id/textDefault"
+            android:padding="5dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/colorPrimary"
+
+            />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
