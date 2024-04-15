@@ -63,10 +63,10 @@ class ShopFragment : Fragment() {
             return categories.size
         }
         override fun createFragment(position: Int): Fragment {
-            val selected: List<Products> = if (position == 0) {
-                products
+            val selected: ArrayList<Products> = if (position == 0) {
+                ArrayList(products)
             } else {
-                products.filter { it.brand == categories[position] }
+                ArrayList(products.filter { it.brand == categories[position] })
             }
 
             return MenuProductsFrragment.newInstance(products = selected)

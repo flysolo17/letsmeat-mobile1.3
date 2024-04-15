@@ -90,6 +90,7 @@ dependencies {
 
     //recapcha
     implementation("androidx.browser:browser:1.4.0")
+    implementation ("com.google.android.gms:play-services-safetynet:18.0.1")
 
     //location service
     implementation( "com.google.android.gms:play-services-location:21.0.0")

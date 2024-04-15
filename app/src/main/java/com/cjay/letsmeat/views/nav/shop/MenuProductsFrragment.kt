@@ -33,11 +33,7 @@ class MenuProductsFrragment : Fragment() ,ProductAdapterClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            products = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.getParcelableArray(PRODUCTS, Products::class.java)?.toList() ?: emptyList()
-            } else {
-                it.getParcelableArray(PRODUCTS,Products::class.java)?.toList() ?: emptyList()
-            }
+            products = it.getParcelableArrayList(PRODUCTS)
 
         }
     }
@@ -63,10 +59,10 @@ class MenuProductsFrragment : Fragment() ,ProductAdapterClickListener{
 
     companion object {
         @JvmStatic
-        fun newInstance(products: List<Products>) =
+        fun newInstance(products: ArrayList<Products>) =
             MenuProductsFrragment().apply {
                 arguments = Bundle().apply {
-                    putParcelableArray(PRODUCTS, products.toTypedArray())
+                    putParcelableArrayList(PRODUCTS, products)
                 }
             }
     }

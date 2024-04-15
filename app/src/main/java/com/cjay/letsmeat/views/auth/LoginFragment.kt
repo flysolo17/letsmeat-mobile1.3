@@ -22,6 +22,7 @@ import com.google.android.material.tabs.TabLayout.Tab
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
 import com.google.firebase.auth.PhoneAuthCredential
@@ -46,13 +47,16 @@ class LoginFragment : Fragment() {
             Log.w(TAG, "onVerificationFailed", e)
             when (e) {
                 is FirebaseAuthInvalidCredentialsException -> {
-                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_LONG).show()
                 }
                 is FirebaseTooManyRequestsException -> {
-                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_LONG).show()
                 }
                 is FirebaseAuthMissingActivityForRecaptchaException -> {
-                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_LONG).show()
+                }
+                is FirebaseAuthException -> {
+                    Toast.makeText(_binding.root.context,e.toString(),Toast.LENGTH_LONG).show()
                 }
             }
         }

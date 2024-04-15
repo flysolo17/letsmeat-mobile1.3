@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.cjay.letsmeat.databinding.ActivityMainBinding
 import com.cjay.letsmeat.models.customers.Customers
 import com.cjay.letsmeat.models.transactions.TransactionDetails
+import com.cjay.letsmeat.models.transactions.Transactions
 import com.cjay.letsmeat.models.transactions.isToday
 import com.cjay.letsmeat.utils.LoadingDialog
 import com.cjay.letsmeat.utils.UiState
@@ -30,6 +31,8 @@ import com.google.android.material.badge.ExperimentalBadgeUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
+import java.util.Date
 
 @ExperimentalBadgeUtils @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private val transactionViewModel by viewModels<TransactionViewModel>()
     private val messagesViewModel by viewModels<MessagesViewModel>()
     private lateinit var badge: BadgeDrawable
+    private lateinit var badgeTransactions: BadgeDrawable
     private lateinit var messagesbagde: BadgeDrawable
     private var customer : Customers ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        badgeTransactions = BadgeDrawable.create(this)
         badge = BadgeDrawable.create(this)
         messagesbagde = BadgeDrawable.create(this)
         setUpNav()
@@ -64,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_transactions,
                 R.id.menu_profile,)
         )
+        badgeTransactions =   navView.getOrCreateBadge(R.id.menu_transactions)
+        BadgeUtils.attachBadgeDrawable(badgeTransactions, binding.bottomAppBar, R.id.menu_transactions)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         productViewModel.getAllProducts()
@@ -119,6 +126,11 @@ class MainActivity : AppCompatActivity() {
                             .getAllTransactionByCustomerID(c.id ?:"") {
                                 if (it is UiState.SUCCESS) {
                                     transactionViewModel.setTransactionList(it.data)
+                                    val count = countTransactionsToday(it.data)
+                                    if (count > 0) {
+                                        badgeTransactions.number = count
+                                    }
+
                                 }
                         }
                     }
@@ -181,4 +193,13 @@ class MainActivity : AppCompatActivity() {
             authViewModel.getUserByID(uid = it.uid)
         }
     }
+
+
+    //Count the transactions created or updated today
+    fun countTransactionsToday(transactions: List<Transactions>): Int {
+     return   transactions.filter { it.transactionDate.isToday() || it.transactionDate.isToday() }.size
+    }
+
+
+    
 }
