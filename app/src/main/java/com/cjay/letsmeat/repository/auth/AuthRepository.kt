@@ -12,8 +12,8 @@ interface AuthRepository {
 
     fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential,result: (UiState<String>) -> Unit)
     fun verifyOTP(verificationCode: String,OTP: String,result: (UiState<FirebaseUser>) -> Unit)
-    fun getAccountByID(uid : String,result: (UiState<Customers?>) -> Unit)
-    fun checkUserByID(currentUser: FirebaseUser,result: (UiState<Customers>) -> Unit)
+    suspend  fun getAccountByID(uid : String,result: (UiState<Customers?>) -> Unit)
+       fun checkUserByID(currentUser: FirebaseUser,result: (UiState<Customers>) -> Unit)
     fun updateFullname(uid: String  ,fullname : String,result: (UiState<String>) -> Unit)
     fun createAddress(uid: String, addresses: Addresses, result: (UiState<String>) -> Unit)
     fun changeDefaultAddress(uid: String,position : Int,result: (UiState<String>) -> Unit)

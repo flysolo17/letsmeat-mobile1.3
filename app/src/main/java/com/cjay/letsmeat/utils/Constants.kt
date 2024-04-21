@@ -3,6 +3,7 @@ package com.cjay.letsmeat.utils
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.webkit.MimeTypeMap
 import com.cjay.letsmeat.models.messages.Messages
 import com.cjay.letsmeat.models.product.ProductOptions
@@ -68,9 +69,11 @@ fun Date.timeAgoOrDateTimeFormat(): String {
 
 
 fun String.getDigits(): Double {
-    val match = Regex("\\d+").find(this) // Match one or more digits
+    val match = Regex("-?\\d+(\\.\\d+)?").find(this)
+    Log.d("conversion", match?.value.toString())
     return match?.value?.toDoubleOrNull() ?: 0.00
 }
+
 
 fun String.getStringInput(input: String): String {
     val match = Regex("[a-zA-Z]+").find(input) // Match one or more alphabetic characters
@@ -106,8 +109,9 @@ fun computeItemTotalCost(cost: Double, quantity: Int, option: ProductOptions?): 
  */
 fun String.convertToKilogram(): Double {
     val unit = getStringInput(input = this)
-    val weight = this.getDigits()
 
+    val weight = this.getDigits()
+    Log.d("convertion",weight.toString())
     return when (unit.lowercase()) {
         "kg" -> weight
         "g" -> weight / 1000

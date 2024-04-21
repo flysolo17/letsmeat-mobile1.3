@@ -127,9 +127,8 @@ class MainActivity : AppCompatActivity() {
                                 if (it is UiState.SUCCESS) {
                                     transactionViewModel.setTransactionList(it.data)
                                     val count = countTransactionsToday(it.data)
-                                    if (count > 0) {
-                                        badgeTransactions.number = count
-                                    }
+                                    badgeTransactions.number = count
+
 
                                 }
                         }
@@ -197,7 +196,7 @@ class MainActivity : AppCompatActivity() {
 
     //Count the transactions created or updated today
     fun countTransactionsToday(transactions: List<Transactions>): Int {
-     return   transactions.filter { it.transactionDate.isToday() || it.transactionDate.isToday() }.size
+     return   transactions.filter { it.transactionDate.isToday() || it.updatedAt.isToday() }.size
     }
 
 

@@ -18,8 +18,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.cjay.letsmeat.R
 import com.cjay.letsmeat.databinding.FragmentMenuProductsFrragmentBinding
 import com.cjay.letsmeat.models.product.Products
+import com.cjay.letsmeat.models.transactions.Transactions
 import com.cjay.letsmeat.utils.UiState
+import com.cjay.letsmeat.utils.UiState.SUCCESS
 import com.cjay.letsmeat.viewmodels.ProductViewModel
+import com.cjay.letsmeat.viewmodels.TransactionViewModel
 import com.cjay.letsmeat.views.adapters.ProductAdapterClickListener
 import com.cjay.letsmeat.views.adapters.ProductsAdapter
 
@@ -28,7 +31,8 @@ class MenuProductsFrragment : Fragment() ,ProductAdapterClickListener{
 
     private var products: List<Products>? = null
     private lateinit var _binding : FragmentMenuProductsFrragmentBinding
-
+    private val _transactionViewModel by activityViewModels<TransactionViewModel>()
+    private var _transactionList = listOf<Transactions>()
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,13 @@ class MenuProductsFrragment : Fragment() ,ProductAdapterClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val productsAdapter = ProductsAdapter(_binding.root.context,products ?: emptyList(),this@MenuProductsFrragment)
+
+        val productsAdapter = ProductsAdapter(_binding.root.context,products ?: emptyList(),_transactionList,this@MenuProductsFrragment)
+
+        _transactionViewModel.transactions.observe(viewLifecycleOwner) {
+            _transactionList = it
+            productsAdapter.setTransactions(_transactionList)
+        }
         _binding.recyclerviewProducts.apply {
             layoutManager = GridLayoutManager(_binding.root.context,2)
             adapter = productsAdapter

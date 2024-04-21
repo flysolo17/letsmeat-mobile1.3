@@ -1,6 +1,8 @@
 package com.cjay.letsmeat.config
 
 
+import com.cjay.letsmeat.repository.accounts.AccountsRepository
+import com.cjay.letsmeat.repository.accounts.AccountsRepositoryImpl
 import com.cjay.letsmeat.repository.auth.AuthRepository
 import com.cjay.letsmeat.repository.auth.AuthRepositoryImpl
 import com.cjay.letsmeat.repository.cart.CartRepository
@@ -12,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.cjay.letsmeat.repository.products.ProductRepository
 import com.cjay.letsmeat.repository.products.ProductRepositoryImpl
+import com.cjay.letsmeat.repository.review.ReviewRepository
+import com.cjay.letsmeat.repository.review.ReviewRepositoryImpl
 import com.cjay.letsmeat.repository.transaction.TransactionRepository
 import com.cjay.letsmeat.repository.transaction.TransactionRepositoryImpl
 
@@ -57,5 +61,18 @@ object RepositoryModules {
     @Provides
     fun provideMessagesRepository(firestore: FirebaseFirestore) : MessagesRepository {
         return  MessagesRepositoryImpl(firestore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideReviewRepository(firestore: FirebaseFirestore) : ReviewRepository {
+        return ReviewRepositoryImpl(firestore)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideAccountRepository(firestore: FirebaseFirestore) : AccountsRepository {
+        return AccountsRepositoryImpl(firestore)
     }
 }

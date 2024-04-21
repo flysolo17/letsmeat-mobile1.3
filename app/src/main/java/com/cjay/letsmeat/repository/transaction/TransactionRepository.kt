@@ -12,4 +12,7 @@ interface TransactionRepository {
     fun addPayment(transactionID : String,payment: Payment,result: (UiState<String>) -> Unit)
     suspend fun uploadReceipt(uri: Uri,result: (UiState<String>) -> Unit)
     fun cancelTransaction(transactionID: String,result: (UiState<String>) -> Unit)
+
+    fun getDriverInfo(driverID : String ,result: (UiState<String>) -> Unit)
+
 }

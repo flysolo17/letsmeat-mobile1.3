@@ -199,10 +199,40 @@
         <action
             android:id="@+id/action_menu_transactions_to_paymentFragment"
             app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_menu_transactions_to_reviewTransactionFragment"
+            app:destination="@id/reviewTransactionFragment" />
     </fragment>
     <fragment
         android:id="@+id/menu_messages"
         android:name="com.cjay.letsmeat.views.nav.messages.MessagesFragment"
         android:label="messages"
         tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/reviewTransactionFragment"
+        android:name="com.cjay.letsmeat.views.transactions.ReviewTransactionFragment"
+        android:label="Rate Product"
+        tools:layout="@layout/fragment_review_transaction" >
+        <argument
+            android:name="transaction"
+            app:argType="com.cjay.letsmeat.models.transactions.Transactions" />
+        <action
+            android:id="@+id/action_reviewTransactionFragment_to_rateProductFragment"
+            app:destination="@id/rateProductFragment" />
+        <argument
+            android:name="reviews"
+            app:argType="com.cjay.letsmeat.models.Reviews[]" />
+    </fragment>
+    <dialog
+        android:id="@+id/rateProductFragment"
+        android:name="com.cjay.letsmeat.views.transactions.RateProductFragment"
+        android:label="fragment_rate_product"
+        tools:layout="@layout/fragment_rate_product" >
+        <argument
+            android:name="item"
+            app:argType="com.cjay.letsmeat.models.transactions.OrderItems" />
+        <argument
+            android:name="transactionID"
+            app:argType="string" />
+    </dialog>
 </navigation>

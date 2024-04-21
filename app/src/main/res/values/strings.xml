@@ -160,5 +160,9 @@
     <string name="gcash_desciption">Thank you for choosing GCash as your payment method! Please complete your transaction by sending the total amount due to our GCash account with the following details:</string>
     <string name="attach">After Sending the exact amount screenshot or save your receipt and attach your receipt below.</string>
     <string name="attach_receipt">Attach Receipt</string>
+    <string name="your_order_might_be_declined_if_you_don_t_pay_within_24_hours">Your order might be declined if you don\'t pay within 24 hours.</string>
+    <string name="driver_info">Driver Info</string>
+    <string name="rating">Rating:</string>
+    <string name="test">Example review of bla bla blahaha ratest lang namans ehh test</string>
 
 </resources>

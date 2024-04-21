@@ -51,3 +51,16 @@ fun OrderItems.getQuantity() : Int {
     val optionQ = this.options?.quantity ?: 1
     return  this.quantity * optionQ
 }
+
+fun List<OrderItems>.computeProductSold(productID: String): Int {
+    // Sum the quantity of items sold for the given product ID
+    return this.sumOf { orderItem ->
+        if (orderItem.productID == productID) {
+            // Return the quantity of the item if the product ID matches
+            orderItem.getQuantity()
+        } else {
+            // Return 0 if the product ID does not match
+            0
+        }
+    }
+}

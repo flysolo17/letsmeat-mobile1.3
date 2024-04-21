@@ -93,7 +93,14 @@
             android:textSize="10sp"
             android:textAlignment="center"
             android:layout_marginHorizontal="10dp"
-            android:text="Your order might be declined if you don't pay within 24 hours."
+            android:text="@string/your_order_might_be_declined_if_you_don_t_pay_within_24_hours"
             android:textColor="#EF5350" />
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnRate"
+            android:layout_gravity="end"
+            app:cornerRadius="5dp"
+            android:text="@string/rate"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -11,10 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cjay.letsmeat.R
 import com.cjay.letsmeat.databinding.FragmentOrderByStatusBinding
+import com.cjay.letsmeat.models.Reviews
 import com.cjay.letsmeat.models.transactions.TransactionStatus
 import com.cjay.letsmeat.models.transactions.Transactions
 import com.cjay.letsmeat.utils.LoadingDialog
 import com.cjay.letsmeat.utils.UiState
+import com.cjay.letsmeat.viewmodels.RatingViewModel
 import com.cjay.letsmeat.viewmodels.TransactionViewModel
 import com.cjay.letsmeat.views.adapters.TransactionAdapter
 import com.cjay.letsmeat.views.adapters.TransactionClickListener
@@ -26,6 +28,7 @@ class OrderByStatusFragment : Fragment() ,TransactionClickListener{
     private lateinit var _binding : FragmentOrderByStatusBinding
     private lateinit var _loadingDialog: LoadingDialog
     private val _transactionViewModel by activityViewModels<TransactionViewModel>()
+    private val _reviewViewModel by activityViewModels<RatingViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +57,7 @@ class OrderByStatusFragment : Fragment() ,TransactionClickListener{
             }
             _binding.recyclerviewTransactions.apply {
                 layoutManager = LinearLayoutManager(view.context)
-                adapter = TransactionAdapter(view.context,transactions,this@OrderByStatusFragment)
+                adapter = TransactionAdapter(view.context,transactions,this@OrderByStatusFragment,_reviewViewModel)
             }
         }
     }
@@ -81,6 +84,12 @@ class OrderByStatusFragment : Fragment() ,TransactionClickListener{
         val directions = TransactionsFragmentDirections.actionMenuTransactionsToPaymentFragment(transactions)
         findNavController().navigate(directions)
     }
+
+    override fun rateTransaction(transactions: Transactions,reviews: List<Reviews>) {
+        val directions = TransactionsFragmentDirections.actionMenuTransactionsToReviewTransactionFragment(transactions ,reviews.toTypedArray())
+        findNavController().navigate(directions)
+    }
+
     private fun cancelTransaction(transactioID: String) {
         _transactionViewModel.transactionRepository.cancelTransaction(transactioID) {
             when(it) {

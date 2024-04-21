@@ -68,7 +68,7 @@ class AuthRepositoryImpl(private  val firestore : FirebaseFirestore,private  val
     }
 
 
-    override fun getAccountByID(uid: String, result: (UiState<Customers?>) -> Unit) {
+    override suspend fun getAccountByID(uid: String, result: (UiState<Customers?>) -> Unit) {
         result.invoke(UiState.LOADING)
         firestore.collection(USER_COLLECTION)
             .document(uid)

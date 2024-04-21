@@ -118,4 +118,8 @@ class TransactionRepositoryImpl(private val firestore: FirebaseFirestore,private
             }
 
     }
+
+    override fun getDriverInfo(driverID: String, result: (UiState<String>) -> Unit) {
+        TODO("Not yet implemented")
+    }
 }

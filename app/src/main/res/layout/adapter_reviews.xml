@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/profile"
+        android:id="@+id/imageCustomerProfile"
+        android:scaleType="centerCrop"
+        android:layout_margin="5dp"
+        app:shapeAppearance="@style/CornerCut"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/juan_dela_cruz"
+            android:id="@+id/textCustomerName"
+            style="@style/TextAppearance.Material3.TitleMedium"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:id="@+id/customerRating"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            style="@style/Widget.AppCompat.RatingBar.Small"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textCustomerFeedback"
+            android:text="@string/your_order_might_be_declined_if_you_don_t_pay_within_24_hours"
+            android:justificationMode="inter_word"
+            style="@style/TextAppearance.Material3.BodySmall"
+            tools:targetApi="o" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.cjay.letsmeat.models.product
 
 import android.os.Parcelable
+import com.cjay.letsmeat.models.transactions.OrderItems
 import kotlinx.parcelize.Parcelize
 import java.util.Date
 
@@ -31,4 +32,8 @@ fun Products.getName(option: ProductOptions?) : String {
     } else {
         this.name ?: ""
     }
+
+
+
 }
+

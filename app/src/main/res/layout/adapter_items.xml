@@ -53,6 +53,5 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="x1"/>
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>
