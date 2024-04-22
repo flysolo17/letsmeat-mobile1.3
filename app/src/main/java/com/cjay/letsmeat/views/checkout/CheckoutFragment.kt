@@ -218,6 +218,8 @@ class CheckoutFragment : Fragment() ,DeliveryOptionClickListener,PaymentClickLis
 
     override fun onDeliveryClicked(position: Int) {
         _deliveryTypeAdapter.setDeliveryOption(position)
+
+        _binding.layoutAddress.visibility = if (position == 0) View.VISIBLE else View.GONE
         displayOrderDetails()
     }
 

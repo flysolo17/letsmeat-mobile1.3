@@ -1,11 +1,14 @@
 package com.cjay.letsmeat.views.nav.shop
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -75,9 +78,49 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
         return _binding.root
     }
 
+    private val textWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+        }
+
+
+        override fun afterTextChanged(s: Editable?) {
+
+            if (s.toString().isNotEmpty()) {
+                try {
+                    val optionQuantity = _option?.quantity ?: 1
+                    val quantity = s.toString().toInt()
+
+                    if (quantity > _product.stocks / optionQuantity) {
+                        _currentQuantity = 1
+                        s?.clear()
+
+                    } else {
+
+                        _currentQuantity = quantity
+
+
+                        _binding.textPrice.text = computeItemSubtotal(_product.price, _currentQuantity, _option).toPHP()
+                    }
+                } catch (e: NumberFormatException) {
+                    _currentQuantity = 0
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
+        _binding.textQuantity1.addTextChangedListener(textWatcher)
+
+
         _binding.buttonAdd.setOnClickListener {
             val optionQuantity = _option?.quantity ?: 1
             val nextQuantity = (_currentQuantity + 1) * optionQuantity
@@ -143,8 +186,24 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
         }
     }
     private fun updatePriceAndQuantity(quantity : Int) {
-        _binding.textQuantity.text = quantity.toString()
-        _binding.textPrice.text = computeItemSubtotal(_product.price,quantity,_option).toPHP()
+/*        // Temporarily remove the TextWatcher from _binding.textQuantity1
+        _binding.textQuantity1.removeTextChangedListener(textWatcher)
+
+        // Update the quantity text only if the new quantity is different
+        val currentQuantity = _binding.textQuantity1.text.toString().toIntOrNull()
+        if (currentQuantity != quantity) {
+            _binding.textQuantity1.setText(quantity.toString())
+        }
+
+        // Reattach the TextWatcher to _binding.textQuantity1
+        _binding.textQuantity1.addTextChangedListener(textWatcher)
+
+        // Compute the subtotal and update _binding.textPrice
+        _binding.textPrice.text = computeItemSubtotal(_product.price, quantity, _option).toPHP()*/
+
+        _binding.textQuantity1.setText(_currentQuantity.toString())
+
+        _binding.textPrice.text = computeItemSubtotal(_product.price, quantity, _option).toPHP()
     }
 
     private fun getVisiblity(options: ProductOptions ? ) : Int {

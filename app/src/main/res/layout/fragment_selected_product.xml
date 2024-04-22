@@ -89,14 +89,29 @@
                 app:icon="@drawable/minus"
                 app:cornerRadius="5dp"
                 style="@style/Widget.Material3.Button.IconButton.Filled"/>
-            <TextView
-                android:id="@+id/textQuantity"
+
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:text="1"
+                android:inputType="number"
+                android:paddingHorizontal="8dp"
+                android:background="@null"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:layout_margin="8dp"
+                android:id="@+id/textQuantity1"/>
+<!--            <TextView-->
+<!--                android:id="@+id/textQuantity"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:text="1"-->
+<!--                android:fontFamily="@font/poppins_semibold"-->
+<!--                android:textSize="16sp"/>-->
+
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

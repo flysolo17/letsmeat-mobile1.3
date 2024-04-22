@@ -6,6 +6,8 @@ import com.cjay.letsmeat.utils.computeItemSubtotal
 import com.cjay.letsmeat.utils.computeItemTotalCost
 import com.cjay.letsmeat.utils.generateRandomNumbers
 import kotlinx.parcelize.Parcelize
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 @Parcelize
 data class OrderItems(
@@ -39,13 +41,17 @@ fun List<OrderItems>.computeTotalTax() : Double {
     return 12 * this.getTotalWithTax() / 100
 }
 
-fun List<OrderItems>.getTotalWeight() : Double{
-    var total = 0.00
-    this.map {
+
+fun List<OrderItems>.getTotalWeight(): Double {
+    var total = 0.0
+    this.forEach {
         total += it.weight
     }
-    return total
+
+
+    return BigDecimal(total).setScale(2, RoundingMode.HALF_UP).toDouble()
 }
+
 
 fun OrderItems.getQuantity() : Int {
     val optionQ = this.options?.quantity ?: 1
