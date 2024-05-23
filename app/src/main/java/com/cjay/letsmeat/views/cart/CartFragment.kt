@@ -87,8 +87,14 @@ class CartFragment : Fragment() ,CartClickListener{
         itemTouchHelper.attachToRecyclerView(_binding.recyclerViewCart)
         observers()
         _binding.buttonCheckout.setOnClickListener {
+            val combinedCartList = _cartList.groupBy { it.productID }
+                .map { (productID, items) ->
+                    val totalQuantity = items.sumOf { it.quantity }
+                    Cart(productID = productID, quantity = totalQuantity)
+                }
+
             var stocksOk = true
-            _cartList.forEach { cart ->
+            combinedCartList.forEach { cart ->
                 val product = _productList.find { it.id == cart.productID }
                 if (product != null && product.stocks < cart.quantity) {
                     stocksOk = false
