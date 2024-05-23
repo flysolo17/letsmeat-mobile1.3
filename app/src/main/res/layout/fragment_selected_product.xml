@@ -56,6 +56,14 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="0"/>
+
+            <TextView
+                android:id="@+id/textQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="0"/>
         </LinearLayout>
 
 

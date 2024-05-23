@@ -46,6 +46,7 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
     private  var _option : ProductOptions ? = null
     private var _customer : Customers ? = null
     private var _currentQuantity = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _product = _args.product
@@ -74,6 +75,7 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
 
         _binding.textProductName.text = _product.name
         updatePriceAndQuantity(_currentQuantity)
+        _binding.textQuantity.text = "${_product.stocks} items left"
         Glide.with(_binding.root.context).load(_product.image).error(R.drawable.product).into(_binding.imageSelectedVariation)
         return _binding.root
     }
