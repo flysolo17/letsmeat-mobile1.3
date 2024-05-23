@@ -20,4 +20,7 @@ class ProductViewModel @Inject constructor(private val productRepository: Produc
             _productList.value = it
         }
     }
+    fun setProduct(products: UiState<List<Products>>) {
+        _productList.value = products
+    }
 }

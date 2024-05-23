@@ -31,6 +31,7 @@ class ShopFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _productViewModel.getAllProducts()
         _productViewModel._products.observe(viewLifecycleOwner) { it ->
             when(it) {
                 is UiState.FAILED -> {

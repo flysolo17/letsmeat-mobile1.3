@@ -25,6 +25,7 @@ import com.cjay.letsmeat.utils.LoadingDialog
 import com.cjay.letsmeat.utils.UiState
 import com.cjay.letsmeat.utils.toPHP
 import com.cjay.letsmeat.viewmodels.AuthViewModel
+import com.cjay.letsmeat.viewmodels.ProductViewModel
 import com.cjay.letsmeat.viewmodels.RatingViewModel
 import com.cjay.letsmeat.viewmodels.TransactionViewModel
 import com.cjay.letsmeat.views.adapters.CustomerReviewAdapter
@@ -34,28 +35,36 @@ import com.cjay.letsmeat.views.adapters.RatingAdapter
 
 class ViewProductFragment : Fragment() {
     private val _authViewModel by activityViewModels<AuthViewModel>()
+    private val _productViewModel by activityViewModels<ProductViewModel>()
     private lateinit var _binding : FragmentViewProductBinding
     private val _args by navArgs<ViewProductFragmentArgs>()
     private var _customers : Customers ? = null
     private lateinit var _loadingDialog : LoadingDialog
-
+    private var _product :Products ? = null
     private lateinit var optionAdapter: OptionAdapter
     private val _reviewViewModel by activityViewModels<RatingViewModel>()
     private val _transactionViewModel by activityViewModels<TransactionViewModel>()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _product = _args.products
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentViewProductBinding.inflate(inflater,container,false)
         _loadingDialog = LoadingDialog(_binding.root.context)
+        _product?.let {
+            bindViews(it)
+        }
 
         return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViews(_args.products)
         observers()
         optionAdapter = OptionAdapter(view.context,_args.products.options)
         _binding.recyclerviewOption.apply {
@@ -83,7 +92,9 @@ class ViewProductFragment : Fragment() {
             val options : ProductOptions ? =if  (optionAdapter.getSelectedSize() == -1) {
                 null
             } else {
-                _args.products.options[optionAdapter.getSelectedSize()]
+                _product?.let {
+                    it.options[optionAdapter.getSelectedSize()]
+                }
             }
             val directions = ViewProductFragmentDirections.actionViewProductFragmentToSelectedProductFragment(_args.products,options,false)
             findNavController().navigate(directions)
@@ -92,7 +103,6 @@ class ViewProductFragment : Fragment() {
 
     private fun bindViews(products: Products) {
         Glide.with(_binding.root.context).load(products.image).error(R.drawable.product).into(_binding.imageProduct)
-
         _binding.textItemWeight.text ="${products.weight}"
         _binding.textProductName.text = products.name
         _binding.textProductPrice.text = products.price.toPHP()
@@ -110,7 +120,6 @@ class ViewProductFragment : Fragment() {
             if (it is UiState.SUCCESS) {
                 _binding.ratingBar.rating = it.data.getAveReviews(products.id ?: "")
                 _binding.textRatingTotal.text = it.data.getTotalReviews(products.id ?: "")
-
                 if (it.data.isEmpty()) {
                     _binding.textNoComment.visibility = View.VISIBLE
                 } else {
@@ -128,6 +137,14 @@ class ViewProductFragment : Fragment() {
     }
 
     private fun observers() {
+        _productViewModel._products.observe(viewLifecycleOwner) {
+            if(it is UiState.SUCCESS) {
+                val product = it.data.find { it.id == _args.products.id }
+                product?.let {p ->
+                    _product = p
+                }
+            }
+        }
         _transactionViewModel.transactions.observe(viewLifecycleOwner) {
             _binding.itemSold.text = it.sumOf { it.items.computeProductSold(_args.products.id?:"") }.toString()
         }

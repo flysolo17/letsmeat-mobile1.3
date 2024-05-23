@@ -31,6 +31,7 @@ import com.cjay.letsmeat.utils.getDigits
 import com.cjay.letsmeat.utils.toPHP
 import com.cjay.letsmeat.viewmodels.AuthViewModel
 import com.cjay.letsmeat.viewmodels.CartViewModel
+import com.cjay.letsmeat.viewmodels.ProductViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
@@ -75,7 +76,16 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
 
         _binding.textProductName.text = _product.name
         updatePriceAndQuantity(_currentQuantity)
-        _binding.textQuantity.text = "${_product.stocks} items left"
+        if (_product.stocks < 1) {
+            _binding.textQuantity.text = "Out of stock"
+            _binding.buttonBuyNow.isEnabled = false
+            _binding.buttonAddTocart.isEnabled = false
+        } else {
+            _binding.textQuantity.text = "${_product.stocks} items left"
+            _binding.buttonBuyNow.isEnabled = true
+            _binding.buttonAddTocart.isEnabled = true
+        }
+
         Glide.with(_binding.root.context).load(_product.image).error(R.drawable.product).into(_binding.imageSelectedVariation)
         return _binding.root
     }
@@ -143,14 +153,25 @@ class SelectedProductFragment : BottomSheetDialogFragment() {
             Toast.makeText(view.context,"You reach the minimum quantity", Toast.LENGTH_SHORT).show()
         }
         _binding.buttonAddTocart.setOnClickListener {
+            val optionQ = _option?.quantity ?: 1
+            val quantityInStocks = _currentQuantity * optionQ
+            if (quantityInStocks > _product.stocks) {
+                Toast.makeText(view.context,"No Products available",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             _customer?.let {
                 val cart  = Cart(userID = it.id , productID = _product.id, option = _option, quantity = _currentQuantity)
                 cart.addToCart()
             }
         }
         _binding.buttonBuyNow.setOnClickListener {
+
             val optionQ = _option?.quantity ?: 1
             val quantityInStocks = _currentQuantity * optionQ
+            if (quantityInStocks > _product.stocks) {
+                Toast.makeText(view.context,"No Products available",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val wInKG = _product.weight?.convertToKilogram() ?: 0.0
             val items = OrderItems(
                 productID = _product.id ?: "",

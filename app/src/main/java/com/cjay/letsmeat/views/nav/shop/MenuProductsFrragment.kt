@@ -38,7 +38,6 @@ class MenuProductsFrragment : Fragment() ,ProductAdapterClickListener{
         super.onCreate(savedInstanceState)
         arguments?.let {
             products = it.getParcelableArrayList(PRODUCTS)
-
         }
     }
 

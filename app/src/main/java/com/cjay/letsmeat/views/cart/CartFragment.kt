@@ -29,6 +29,7 @@ import com.cjay.letsmeat.utils.computeItemTotalCost
 import com.cjay.letsmeat.utils.convertToKilogram
 import com.cjay.letsmeat.utils.toPHP
 import com.cjay.letsmeat.viewmodels.CartViewModel
+import com.cjay.letsmeat.viewmodels.ProductViewModel
 import com.cjay.letsmeat.views.adapters.CartAdapter
 import com.cjay.letsmeat.views.adapters.CartClickListener
 import com.google.firestore.v1.StructuredQuery.Order
@@ -38,9 +39,11 @@ class CartFragment : Fragment() ,CartClickListener{
     private lateinit var _binding : FragmentCartBinding
     private lateinit var _loadingDialog : LoadingDialog
     private val _cartViewModel by activityViewModels<CartViewModel>()
+    private val _productViewModel by activityViewModels<ProductViewModel>()
     private lateinit var _cartAdapter : CartAdapter
     private  var _cartList = emptyList<Cart>()
     private val _selectedCart : MutableList<OrderItems> = mutableListOf()
+    private var _productList = listOf<Products>()
     private val _itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
         override fun onMove(
             recyclerView: RecyclerView,
@@ -69,6 +72,11 @@ class CartFragment : Fragment() ,CartClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _productViewModel._products.observe(viewLifecycleOwner) {
+            if (it is UiState.SUCCESS) {
+                _productList = it.data
+            }
+        }
         _cartAdapter = CartAdapter(_binding.root.context, _cartList,this@CartFragment)
         _binding.recyclerViewCart.apply {
             layoutManager = LinearLayoutManager(_binding.root.context)
@@ -79,6 +87,18 @@ class CartFragment : Fragment() ,CartClickListener{
         itemTouchHelper.attachToRecyclerView(_binding.recyclerViewCart)
         observers()
         _binding.buttonCheckout.setOnClickListener {
+            var stocksOk = true
+            _cartList.forEach { cart ->
+                val product = _productList.find { it.id == cart.productID }
+                if (product != null && product.stocks < cart.quantity) {
+                    stocksOk = false
+                    return@forEach  // Exit the loop early if stock is insufficient
+                }
+            }
+            if (!stocksOk) {
+                Toast.makeText(view.context, "Insufficient Stocks", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (_selectedCart.isEmpty()) {
                 Toast.makeText(view.context,"Please select item to checkout",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
