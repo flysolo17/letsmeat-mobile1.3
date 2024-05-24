@@ -20,4 +20,6 @@ interface AuthRepository {
     fun updateAccount(customers: Customers,result: (UiState<String>) -> Unit)
     fun logout()
     suspend fun uploadProfile(imageUri: Uri,uid: String,result: (UiState<Uri>) -> Unit)
+
+   suspend fun deleteAccount(userID : String ,user : FirebaseUser,result: (UiState<String>) -> Unit)
 }

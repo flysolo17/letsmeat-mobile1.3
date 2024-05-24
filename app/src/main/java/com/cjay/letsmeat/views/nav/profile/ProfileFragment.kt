@@ -23,6 +23,7 @@ import com.cjay.letsmeat.views.adapters.CartAdapter
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.badge.ExperimentalBadgeUtils
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -65,7 +66,6 @@ import com.google.firebase.auth.FirebaseUser
 
         _binding.buttonAddresses.setOnClickListener {
             _customer?.let {
-
                 findNavController().navigate(R.id.action_menu_profile_to_addressesFragment)
             }
         }
@@ -74,7 +74,49 @@ import com.google.firebase.auth.FirebaseUser
         _binding.buttonLogin.setOnClickListener {
             findNavController().navigate(R.id.action_menu_profile_to_loginFragment)
         }
+        _binding.buttonDeleteAccount.setOnClickListener {
+            val  user = FirebaseAuth.getInstance().currentUser
+            if (user != null) {
+                MaterialAlertDialogBuilder(view.context)
+                    .setTitle("Delete Account")
+                    .setMessage(
+                        "Are you sure you want to delete your account ? if yes all your data will be deleted such as Messages , Cart ," +
+                                " User Info and uncompleted orders will be automatically removed"
+                    ).setPositiveButton("Confirm") { dialog , _ ->
+                        deleteAccount(_customer?.id ?: "",user).also {
+                            dialog.dismiss()
+                        }
+
+                    }.setNegativeButton("Cancel") { a,dialog ->
+                        a.dismiss()
+                    }.show()
+            } else {
+                Toast.makeText(view.context,"User not found",Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
+
+     private fun deleteAccount(uid : String,firebaseUser: FirebaseUser) {
+         _authViewModel.deleteAccount(uid,firebaseUser) {
+             when(it) {
+                 is UiState.FAILED -> {
+                     _loadingDialog.closeDialog()
+                     Toast.makeText(_binding.root.context,it.message,Toast.LENGTH_SHORT).show()
+                 }
+                 is  UiState.LOADING -> {
+                     _loadingDialog.showDialog("Deleting account")
+                 }
+                 is UiState.SUCCESS -> {
+
+                     _loadingDialog.closeDialog()
+                     Toast.makeText(_binding.root.context,it.data,Toast.LENGTH_SHORT).show()
+                     displayViews(null)
+
+                 }
+             }
+         }
+     }
     private fun observers() {
         _authViewModel.customers.observe(viewLifecycleOwner) {
            if (it is UiState.SUCCESS) {

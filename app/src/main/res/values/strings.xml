@@ -164,5 +164,6 @@
     <string name="driver_info">Driver Info</string>
     <string name="rating">Rating:</string>
     <string name="test">Example review of bla bla blahaha ratest lang namans ehh test</string>
+    <string name="delete_account">Delete Account</string>
 
 </resources>

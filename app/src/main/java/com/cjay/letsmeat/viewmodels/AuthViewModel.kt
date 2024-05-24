@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.cjay.letsmeat.models.customers.Customers
 import com.cjay.letsmeat.repository.auth.AuthRepository
 import com.cjay.letsmeat.utils.UiState
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +29,12 @@ class AuthViewModel @Inject constructor(  val authRepository: AuthRepository): V
     fun getCustomerByID(uid : String,result : (UiState<Customers?> )-> Unit) {
         viewModelScope.launch {
             authRepository.getAccountByID(uid,result)
+        }
+    }
+
+    fun deleteAccount(uid: String ,firebaseUser: FirebaseUser,result : (UiState<String>) -> Unit) {
+        viewModelScope.launch {
+            authRepository.deleteAccount(uid,firebaseUser,result)
         }
     }
 }

@@ -166,6 +166,23 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonDeleteAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/delete_account"
+                    android:textAlignment="textStart"
+                    android:paddingVertical="12dp"
+                    app:cornerRadius="5dp"
+                    android:drawableEnd="@drawable/baseline_arrow_forward_24"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black"
+                    android:elevation="5dp"/>
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonLogout"
                     style="@style/Widget.Material3.Button.IconButton.Filled"
                     android:layout_width="match_parent"

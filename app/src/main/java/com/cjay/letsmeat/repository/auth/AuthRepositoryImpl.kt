@@ -2,13 +2,19 @@ package com.cjay.letsmeat.repository.auth
 
 
 import android.net.Uri
+import android.util.Log
 import com.cjay.letsmeat.models.customers.Addresses
 import com.cjay.letsmeat.models.customers.CustomerType
 import com.cjay.letsmeat.models.customers.Customers
+import com.cjay.letsmeat.models.transactions.TransactionStatus
+import com.cjay.letsmeat.repository.cart.CART_COLLECTION
+import com.cjay.letsmeat.repository.messages.MESSAGES_COLLECTION
+import com.cjay.letsmeat.repository.transaction.TRANSACTION_COLLECTIONS
 import com.cjay.letsmeat.utils.UiState
 import com.google.android.gms.tasks.Task
 import com.google.common.io.Files
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -16,7 +22,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.WriteBatch
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -212,6 +220,70 @@ class AuthRepositoryImpl(private  val firestore : FirebaseFirestore,private  val
         }catch (e: Exception){
             result.invoke(UiState.FAILED(e.message!!))
         }
+    }
+
+    override suspend fun deleteAccount(userID: String,user: FirebaseUser, result: (UiState<String>) -> Unit) {
+
+            result.invoke(UiState.LOADING)
+            val batch = firestore.batch()
+            val userRef = firestore.collection(USER_COLLECTION).document(userID)
+            try {
+                batch.delete(userRef)
+
+
+                val cartQuery = firestore.collection(CART_COLLECTION).whereEqualTo("userID", userID).get().await()
+                for (document in cartQuery.documents) {
+                    val cartRef = firestore.collection(CART_COLLECTION).document(document.id)
+                    batch.delete(cartRef)
+                }
+                val transactionQuery = firestore.collection(TRANSACTION_COLLECTIONS)
+                    .whereEqualTo("userID", userID)
+                    .whereNotEqualTo("status", TransactionStatus.COMPLETED)
+                    .get().await()
+                for (document in transactionQuery.documents) {
+                    val transactionRef = firestore.collection(TRANSACTION_COLLECTIONS).document(document.id)
+                    batch.delete(transactionRef)
+                }
+                val sentMessagesQuery = firestore.collection(MESSAGES_COLLECTION)
+                    .whereEqualTo("senderID", userID)
+                    .get().await()
+                for (document in sentMessagesQuery.documents) {
+                    val messageRef = firestore.collection(MESSAGES_COLLECTION).document(document.id)
+                    batch.delete(messageRef)
+                }
+
+                val receivedMessagesQuery = firestore.collection(MESSAGES_COLLECTION)
+                    .whereEqualTo("receiverID", userID)
+                    .get().await()
+                for (document in receivedMessagesQuery.documents) {
+                    val messageRef = firestore.collection(MESSAGES_COLLECTION).document(document.id)
+                    batch.delete(messageRef)
+                }
+
+                batch.commit().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        user.delete().addOnCompleteListener {
+                            if (it.isSuccessful) {
+
+                            result.invoke(UiState.SUCCESS("Account deleted successfully"))
+                            }  else {
+                                result.invoke(UiState.FAILED("Failed to delete account:"))
+                            }
+
+                        }.addOnFailureListener {
+                            Log.d("delete",it.message.toString())
+                            result.invoke(UiState.FAILED("Failed to delete account: ${it.message}"))
+                        }
+                    }
+                }.addOnFailureListener {e->
+                    Log.d("delete",e.message.toString())
+                    result.invoke(UiState.FAILED("Failed to delete account: ${e.message}"))
+                }
+            } catch (e: Exception) {
+                Log.d("delete",e.message.toString())
+                result.invoke(UiState.FAILED("Failed to delete account: ${e.message}"))
+        }
+
     }
 
 
