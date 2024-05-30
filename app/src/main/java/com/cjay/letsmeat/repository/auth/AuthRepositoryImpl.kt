@@ -237,13 +237,16 @@ class AuthRepositoryImpl(private  val firestore : FirebaseFirestore,private  val
                     batch.delete(cartRef)
                 }
                 val transactionQuery = firestore.collection(TRANSACTION_COLLECTIONS)
-                    .whereEqualTo("userID", userID)
-                    .whereNotEqualTo("status", TransactionStatus.COMPLETED)
+                    .whereEqualTo("customerID", userID)
+                    .whereNotEqualTo("status", "COMPLETED")
                     .get().await()
+
                 for (document in transactionQuery.documents) {
                     val transactionRef = firestore.collection(TRANSACTION_COLLECTIONS).document(document.id)
                     batch.delete(transactionRef)
                 }
+
+
                 val sentMessagesQuery = firestore.collection(MESSAGES_COLLECTION)
                     .whereEqualTo("senderID", userID)
                     .get().await()
@@ -264,7 +267,6 @@ class AuthRepositoryImpl(private  val firestore : FirebaseFirestore,private  val
                     if (it.isSuccessful) {
                         user.delete().addOnCompleteListener {
                             if (it.isSuccessful) {
-
                             result.invoke(UiState.SUCCESS("Account deleted successfully"))
                             }  else {
                                 result.invoke(UiState.FAILED("Failed to delete account:"))

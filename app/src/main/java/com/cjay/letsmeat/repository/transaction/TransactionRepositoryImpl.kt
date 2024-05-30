@@ -10,6 +10,7 @@ import com.cjay.letsmeat.models.transactions.TransactionStatus
 import com.cjay.letsmeat.models.transactions.Transactions
 import com.cjay.letsmeat.repository.auth.USER_COLLECTION
 import com.cjay.letsmeat.repository.cart.CART_COLLECTION
+import com.cjay.letsmeat.repository.products.PRODUCT_COLLECTION
 import com.cjay.letsmeat.utils.UiState
 import com.google.common.io.Files
 import com.google.firebase.FirebaseException
@@ -32,7 +33,19 @@ class TransactionRepositoryImpl(private val firestore: FirebaseFirestore,private
             .set(transactions)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    result.invoke(UiState.SUCCESS("Successfully ordered!"))
+                    val batch = firestore.batch()
+                    transactions.items.forEach {
+                        val optionQuantity = it.options?.quantity ?: 1
+                        val quantity = it.quantity * optionQuantity
+                        val ref =  firestore.collection(PRODUCT_COLLECTION).document(it.productID)
+                        batch.update(ref,"stocks",FieldValue.increment(-quantity.toDouble()))
+                    }
+                    batch.commit().addOnCompleteListener {
+                        result.invoke(UiState.SUCCESS("Successfully ordered!"))
+                    }.addOnFailureListener {
+                        result.invoke(UiState.FAILED(it.message.toString()))
+                    }
+
                 } else {
                     result.invoke(UiState.FAILED(it.exception.toString()))
                 }
